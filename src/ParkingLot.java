@@ -3,38 +3,43 @@ import java.util.ArrayList;
 public class ParkingLot {
     private final int slots;
     private ArrayList<Ticket> tickets;
-    private ArrayList<ParkingFullObserver> observers;
-    private boolean parkingFull;
+    private ArrayList<ParkingFullObserver> parkingFullObservers;
 
     public ParkingLot(int capacity)
     {
         slots = capacity;
         tickets = new ArrayList<>();
-        observers = new ArrayList<>();
-        parkingFull = false;
+        parkingFullObservers = new ArrayList<>();
     }
 
-    public boolean park()
+    public boolean parkAt(int level)
     {
         if(isSlotAvailable()) {
-            tickets.add(new Ticket());
+            issueTicket(level);
+            if(!isSlotAvailable())
+                notifyObservers();
             return true;
         }
         else
         {
-            parkingFull = true;
             notifyObservers();
         }
         return false;
     }
 
+    public Ticket issueTicket(int level) {
+        Ticket ticket = new Ticket(tickets.size(), level);
+        tickets.add(ticket);
+        return ticket;
+    }
+
     private void notifyObservers() {
-        for (ParkingFullObserver observer : observers) {
-            observer.update(parkingFull);
+        for (ParkingFullObserver observer : parkingFullObservers) {
+            observer.update("Parking is Full");
         }
     }
 
-    public boolean unpark(Ticket ticket)
+    public boolean unparkFrom(Ticket ticket)
     {
         if(isValidTicket(ticket))
         {
@@ -60,11 +65,12 @@ public class ParkingLot {
 
     public void attach(ParkingFullObserver observer)
     {
-        observers.add(observer);
+        parkingFullObservers.add(observer);
     }
 
     public void detach(ParkingFullObserver observer)
     {
-        observers.remove(observer);
+        parkingFullObservers.remove(observer);
     }
+
 }

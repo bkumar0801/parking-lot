@@ -1,17 +1,17 @@
 
 public class ParkingLotOwner implements ParkingFullObserver {
-    private final boolean parkingState;
+    private String message;
 
     ParkingLotOwner() {
-        this.parkingState = true;
+        message = "";
     }
     @Override
-    public void update(boolean parkingState) {
-        if(this.parkingState == parkingState)
-            displayParkingFull();
+    public void update(String message) {
+        this.message = message;
+        displayParkingFull();
     }
 
     public String displayParkingFull() {
-        return "Parking is Full";
+        return message;
     }
 }

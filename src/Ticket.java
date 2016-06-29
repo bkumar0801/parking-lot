@@ -1,14 +1,11 @@
 
 public class Ticket {
     private final String ticketID;
-    private static int number;
+    private final int level;
 
-    Ticket() {
-        ticketID = "IN-ORBIT-" + Integer.toString(number++);
-    }
-
-    Ticket(int number) {
+    Ticket(int number, int level) {
         ticketID = "IN-ORBIT-" + Integer.toString(number);
+        this.level = level;
     }
 
     @Override
@@ -24,6 +21,7 @@ public class Ticket {
 
         Ticket ticket = (Ticket) object;
 
-        return this.ticketID.equals(ticket.ticketID);
+        return this.ticketID.equals(ticket.ticketID) &&
+                this.level == ticket.level;
     }
 }

@@ -1,4 +1,4 @@
 
 public interface ParkingFullObserver {
-    public void update(boolean parkingState);
+    public void update(String message);
 }

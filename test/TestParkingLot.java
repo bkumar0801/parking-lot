@@ -7,16 +7,16 @@ public class TestParkingLot {
     @Test
     public void shouldBeAbleToParkWhenSlotIsAvailable() {
         ParkingLot parkingLot = new ParkingLot(2);
-        assertTrue(parkingLot.park());
-        assertTrue(parkingLot.park());
-        assertFalse(parkingLot.park());
+        assertTrue(parkingLot.parkAt(0));
+        assertTrue(parkingLot.parkAt(0));
+        assertFalse(parkingLot.parkAt(0));
     }
 
     @Test
     public void shouldBeAbleToUnparkFromTheParkingLot() {
         ParkingLot parkingLot = new ParkingLot(1);
-        assertTrue(parkingLot.park());
-        assertTrue(parkingLot.unpark(new Ticket(0)));
-        assertFalse(parkingLot.unpark(new Ticket(0)));
+        assertTrue(parkingLot.parkAt(0));
+        assertTrue(parkingLot.unparkFrom(new Ticket(0, 0)));
+        assertFalse(parkingLot.unparkFrom(new Ticket(0, 0)));
     }
 }

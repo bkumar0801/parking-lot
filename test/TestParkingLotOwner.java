@@ -9,9 +9,8 @@ public class TestParkingLotOwner {
         ParkingLot parkingLot = new ParkingLot(2);
         ParkingLotOwner parkingLotOwner = new ParkingLotOwner();
         parkingLot.attach(parkingLotOwner);
-        parkingLot.park();
-        parkingLot.park();
-        parkingLot.park();
-        assertEquals  ("Parking is Full", parkingLotOwner.displayParkingFull());
+        parkingLot.parkAt(0);
+        parkingLot.parkAt(0);
+        assertEquals("Parking is Full", parkingLotOwner.displayParkingFull());
     }
 }
