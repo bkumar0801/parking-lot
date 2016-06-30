@@ -17,12 +17,12 @@ public class ParkingLot {
         if(isSlotAvailable()) {
             issueTicket(level);
             if(!isSlotAvailable())
-                notifyObservers();
+                notifyObservers("Parking is Full");
             return true;
         }
         else
         {
-            notifyObservers();
+            notifyObservers("Parking is Full");
         }
         return false;
     }
@@ -33,9 +33,9 @@ public class ParkingLot {
         return ticket;
     }
 
-    private void notifyObservers() {
+    private void notifyObservers(String message) {
         for (ParkingFullObserver observer : parkingFullObservers) {
-            observer.update("Parking is Full");
+            observer.update(message);
         }
     }
 
@@ -43,6 +43,8 @@ public class ParkingLot {
     {
         if(isValidTicket(ticket))
         {
+            if(!isSlotAvailable())
+                notifyObservers("Space is available");
             tickets.remove(ticket);
             return true;
         }

@@ -8,10 +8,10 @@ public class ParkingLotOwner implements ParkingFullObserver {
     @Override
     public void update(String message) {
         this.message = message;
-        displayParkingFull();
+        displayMessage();
     }
 
-    public String displayParkingFull() {
+    public String displayMessage() {
         return message;
     }
 }
